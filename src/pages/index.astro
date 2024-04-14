@@ -8,10 +8,10 @@ const session = await getSession(Astro.request);
 
 <Layout title="Welcome to Astro.">
   <main>
-    <h1>
+    <p class=" font-bold text-4xl">
       Bienvenido a <span class="text-gradient">IAcode</span>
-    </h1>
-    <p>
+    </p>
+    <p class="text-base font-medium">
       IAcode es una plataforma de aprendizaje de programación y desarrollo web,
       donde podrás aprender a programar desde cero, hasta convertirte en un
       experto en el desarrollo de aplicaciones web.
@@ -27,7 +27,7 @@ const session = await getSession(Astro.request);
       ) : (
         <>
           <p>¡Hola, visitante! 👋</p>
-          <p>
+          <p class="text-sky-500 text-sm font-bold">
             Para acceder a los cursos y recursos de programación, por favor
             inicia sesión.
           </p>
