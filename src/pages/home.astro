@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+
+
+---
+
+<Layout title="Home">
+    {
+        session ? (
+          <div class="gap-3 space-y-3 text-center pb-20">
+            <span class="text-white text-3xl font-bold">
+              ¡Hola, {session.user?.name}! 👋
+            </span>
+            
+          </div>
+        ) : (
+          <div class="gap-3 space-y-3">
+            <span class="text-white text-3xl font-bold">
+              ¡Hola, desconocido! 👋
+            </span>
+            <a href="/login" class="text-white text-lg font-bold">
+              Iniciar sesión
+            </a>
+          </div>
+        )
+      }
+</Layout>

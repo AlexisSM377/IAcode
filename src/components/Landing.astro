@@ -1,0 +1,62 @@
+---
+import { SignIn, SignOut } from "auth-astro/components";
+import { getSession } from "auth-astro/server";
+import LottieAnimation from "astro-integration-lottie/Lottie.astro";
+
+const session = await getSession(Astro.request);
+---
+
+<article
+  class="grid gap-8 sm:grid-cols-2 lg:grid-cols-2 items-center justify-center"
+>
+  <div class="flex-wrap space-y-3 items-center justify-center">
+    <p
+      class="bg-gradient-to-br from-indigo-400 via-violet-600 to-cyan-400 bg-clip-text text-transparent text-8xl font-bold"
+    >
+      IAcode
+    </p>
+    <p class="text-neutral-400 font-bold text-xl">
+      Potencia tu aprendizaje en programación y desarrollo web.
+    </p>
+    <p class="text-gray-400 text-sm font-medium">
+      ¡Únete a IAcode hoy mismo y comienza a resolver tus problemas de
+      programación!
+    </p>
+    {
+      session ? (
+        <div class="gap-3 space-y-3">
+          <span class="text-white text-3xl font-bold">
+            ¡Hola, {session.user?.name}! 👋
+          </span>
+          <SignOut class="bg-sky-500 p-3 rounded-xl">Cerrar sesión</SignOut>
+          <a href="/home" class="bg-orange-500 p-3 rounded-xl">
+            Empezar a chatear
+          </a>
+        </div>
+      ) : (
+        <div class="flex-row justify-center text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 hover:shadow-lg transition-all duration-200 ease-in-out hover-scale gap-x-2 p-4">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-brand-github"
+          >
+            <>
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+            </>
+          </svg>
+          <SignIn provider="github">Iniciar sesión con GitHub</SignIn>
+        </div>
+      )
+    }
+  </div>
+  <div>
+    <LottieAnimation src="../../public/animations/1.json" />
+  </div>
+</article>
